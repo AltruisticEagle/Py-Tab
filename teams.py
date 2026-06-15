@@ -1,13 +1,12 @@
 import csv
 import checks
+from reader import read_csv
 
 def check_team(team_name): #checks for preexisting team names
-    with open("teams.csv", "r") as file:
-        reader = csv.DictReader(file)
-        rows = list(reader)
-        for row in rows:
-            if team_name == row["team_name"]:
-                raise ValueError("\nThe team name is already taken or the team already exists, please try again")
+    rows = read_csv("teams.csv")
+    for row in rows:
+        if team_name == row["team_name"]:
+            raise ValueError("\nThe team name is already taken or the team already exists, please try again")
 
 def create_team_check(team_name, member_1, member_2):
     #these are all just checks for the parameters, they all work fine and the exception raises in UI
@@ -62,10 +61,7 @@ def create_teams(team_name, member_1, member_2):
 def modify_teams(team_modify, modify_parameter, modify_to):
     #this does the modification in the team standings specifically
     if modify_parameter == "team_name": 
-        with open("team_standings.csv", "r") as file:
-            reader = csv.DictReader(file)
-            rows = list(reader)
-
+        rows = read_csv("team_standings.csv")
         with open("team_standings.csv", "w", newline="") as file:
             fieldnames = ["team", "points", "total_speaker_score"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -77,9 +73,7 @@ def modify_teams(team_modify, modify_parameter, modify_to):
                 writer.writerow(row)
         
         #Modifying the draws
-        with open("team_draws.csv", "r") as file:
-            reader = csv.DictReader(file)
-            rows = list(reader)
+        rows = read_csv("team_draws.csv")
 
         with open("team_draws.csv", "w", newline="") as file:
             fieldnames = ["round","room","OG","OO","CG","CO"]
@@ -98,27 +92,32 @@ def modify_teams(team_modify, modify_parameter, modify_to):
                 
     if "member" in modify_parameter: 
         #this does modifications in the speaker standings specifically
-
-        speaker = None
         #what we are doing here is looking in the teams.csv file for the speaker first
         #the one that we need to change the name/status thereof
         #This is because we don't have the name of the person we're changing from the UI
         #so ofc we need to find it first, then we can actually match and change it
-        with open("teams.csv", "r") as file:
-            reader = csv.DictReader(file)
-            rows = list(reader)
+        speaker = None
+        rows = read_csv("teams.csv")
+        for row in rows:
+            if row["team_name"] == team_modify:
+                if "member_1" in modify_parameter:
+                    speaker = row["member_1"]
+                elif "member_2" in modify_parameter:
+                    speaker = row["member_2"]
+                
+        rows = read_csv("speaker_standings.csv")
+        with open("speaker_standings.csv", "w", newline="") as file:
+            fieldnames = ["speaker" ,"total_speaker_score"]
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
             for row in rows:
-                if row["team_name"] == team_modify:
-                    if "member_1" in modify_parameter:
-                        speaker = row["member_1"]
-                    elif "member_2" in modify_parameter:
-                        speaker = row["member_2"]
+                if row["speaker"] == speaker:
+                    row["speaker"] = modify_to
+                    #look at standings --> speaker name matches --> change name
+                writer.writerow(row)
 
     #This section modifies what we have to modify in the teams.csv file - completed, no need for fixes
-    with open("teams.csv", "r") as file:
-        reader = csv.DictReader(file)
-        rows = list(reader)
-
+    rows = read_csv("teams.csv")
     with open("teams.csv", "w", newline="") as file:
         fieldnames = ["team_name", "member_1", "member_2"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -143,18 +142,8 @@ def modify_teams(team_modify, modify_parameter, modify_to):
 def delete_teams(team_modify):
     member_1 = None
     member_2 = None
-    with open("teams.csv", "r") as file:
-        reader = csv.DictReader(file)
-        rows = list(reader)
-        for row in rows:
-            if row["team_name"] == team_modify:
-                member_1 = row["member_1"]
-                member_2 = row["member_2"]
 
-    with open("speaker_standings.csv", "r") as file:
-        reader = csv.DictReader(file)
-        rows = list(reader)
-
+    rows = read_csv("teams.csv")
     with open("speaker_standings.csv", "w", newline="") as file:
         fieldnames = ["speaker", "total_speaker_score",]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -164,10 +153,7 @@ def delete_teams(team_modify):
                 continue
             writer.writerow(row)
 
-    with open("teams.csv", "r") as file:
-        reader = csv.DictReader(file)
-        rows = list(reader)
-
+    rows = read_csv("teams.csv")
     with open("teams.csv", "w", newline="") as file:
         fieldnames = ["team_name", "member_1", "member_2"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -177,10 +163,7 @@ def delete_teams(team_modify):
                 continue
             writer.writerow(row)
 
-    with open("team_standings.csv", "r") as file:
-        reader = csv.DictReader(file)
-        rows = list(reader)
-
+    rows = read_csv("team_standings.csv")
     with open("team_standings.csv", "w", newline="") as file:
         fieldnames = ["team", "points", "total_speaker_score"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)

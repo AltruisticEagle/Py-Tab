@@ -55,7 +55,8 @@ def start_prompt():
             "2.5", 
             "3.1", 
             "3.2", 
-            "4.1", 
+            "4.1",
+            "4.2",
             "4.3", 
             "5", 
             "6.1", 
@@ -127,7 +128,7 @@ def ui_1_2():
             continue
 
 def ui_2_1():
-    print("\nFor the first prompt, input the new adjudicator's name in format adjudicator's first and last name, then answer the questions about status with Y/N.\n"
+    print("\nFor the first prompt, input the new adjudicator's name in format adjudicator's first and last name.\n"
     "Input \"exit\" in the first prompt to exit.\n")
     while True:
         try:
@@ -135,11 +136,9 @@ def ui_2_1():
             if adjudicator_name.lower() == "exit":
                 raise Exit
             adjudicators.check_adjudicator_already_exists(adjudicator_name)
-            chair_status = input("Can they chair? Y/N: ").title().strip()
-            trainee_status = input("Are they a trainee? Y/N: ").title().strip()
 
             print("Adjudicator created.\n")
-            return adjudicator_name, chair_status, trainee_status
+            return adjudicator_name
 
         except Exit:
             sys.exit()
@@ -148,34 +147,15 @@ def ui_2_1():
             continue
 
 def ui_2_2():
-    print("\nTo delete an adjudicator, input \"del\" in the second prompt.\n"
-    "Otherwise, type in the parameter you want to modify in the same " 
-    "prompt: \"adjudicator_name\", \"chair_status\", or \"trainee_status\" exactly.\n"
-    "To modify chair status or trainee status, input simply Y or N (capitalized as is here) " 
-    "in the third prompt depending on what you want to modify it to.\n"
+    print("\nThis deletes the specified adjudicator; to change their name, create a new one.\n"
     "Input \"exit\" in the first input to exit. \n")
     while True:
         try:
             adjudicator_modify = input("Adjudicator to modify: ").strip()
             if adjudicator_modify.lower() == "exit":
-                raise Exit
-            modify_parameter = input("Modify which parameter? ").strip()
-            if modify_parameter not in ["adjudicator_name", 
-                                        "chair_status", 
-                                        "trainee_status", 
-                                        "del"]:
-                print("\nInvalid input, try again\n")
-                continue
-
-            modify_to = None
-            if not modify_parameter == "del":
-                modify_to = input("Modify to what? ").strip()
-            
-            else:
-                adjudicators.check_modify_adjudicators(modify_parameter, modify_to)
-
+                raise Exit            
             print("\nModified adjudicator successfully.\n")
-            return adjudicator_modify, modify_parameter, modify_to
+            return adjudicator_modify
 
         except Exit:
             sys.exit()
@@ -193,7 +173,7 @@ def ui_2_3():
             if adjudicator_name.lower() == "exit":
                 raise Exit
             round_number = input("In which round? ").strip()
-            scorer_type = input("Is the submitter an adjudicator or a speaker? ").strip()
+            scorer_type = input("Is the submitter an adjudicator or a speaker? ").strip().lower()
             scorer_name = input("What is the scorer's name? ").strip()
             score = int(input("Feedback score: ").strip())
 
@@ -281,14 +261,10 @@ def ui_3_2():
             party_1 = input("First party's name: ").strip()
             if party_1.lower() == "exit":
                 raise Exit
-            party_1_status = input("First party's status: ").strip()
             party_2 = input("Second party's name: ").strip()
-            party_2_status = input("Second party's status: ").strip()
-
-            scratches.check_create_scratches(party_1_status, party_2_status)
             
             print("\nScratch successfully inputted.\n")
-            return party_1, party_1_status, party_2, party_2_status
+            return party_1, party_2
             
         except Exit:
             sys.exit()
@@ -389,7 +365,7 @@ def ui_4_2():
             round_number = int(round_number)
             room_number = int(input("Room number: ").strip())
 
-            print("\nBallot deleted - input the modified ballot again if desired with function .\n")
+            print("\nBallot deleted - input the modified ballot again if desired with function 4.1.\n")
             return round_number, room_number
         
         except Exit:

@@ -30,15 +30,12 @@ def main():
             teams.modify_teams(team_modify, modify_parameter, modify_to)
 
     if function_number == "2.1":
-        adjudicator_name, chair_status, trainee_status = ui.ui_2_1()
-        adjudicators.create_adjudicators(adjudicator_name, chair_status, trainee_status)
+        adjudicator_name = ui.ui_2_1()
+        adjudicators.create_adjudicators(adjudicator_name)
 
     if function_number == "2.2":
-        adjudicator_modify, modify_parameter, modify_to = ui.ui_2_2()
-        if modify_parameter == "del":
-            adjudicators.delete_adjudicators(adjudicator_modify)
-        else:
-            adjudicators.modify_adjudicators(adjudicator_modify, modify_parameter, modify_to)
+        adjudicator_modify = ui.ui_2_2()
+        adjudicators.delete_adjudicators(adjudicator_modify)
         
     if function_number == "2.3":
         adjudicator_name, round_number, scorer_type, scorer_name, score = ui.ui_2_3()
@@ -60,8 +57,8 @@ def main():
         ui.display_draw(table_format_draw)
 
     if function_number == "3.2":
-        party_1, party_1_status, party_2, party_2_status = ui.ui_3_2()
-        scratches.create_scratches(party_1, party_1_status, party_2, party_2_status)
+        party_1, party_2 = ui.ui_3_2()
+        scratches.create_scratches(party_1, party_2)
     
     if function_number == "3.3":
         party_1, party_2 = ui.ui_3_3()

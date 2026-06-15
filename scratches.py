@@ -1,29 +1,20 @@
 import csv
 import checks
 
-def check_create_scratches(party_1_status, party_2_status):
-    matches1 = checks.checks(party_1_status, "status_check")
-    matches2 = checks.checks(party_2_status, "status_check")
-    matches = [matches1, matches2]
-    for i in matches:
-        if i == None:
-            print("match failed")
-            raise Exception
 
-def create_scratches(party_1, party_1_status, party_2, party_2_status):
+def create_scratches(party_1, party_2):
     with open("scratches.csv", "r") as file:
         reader = csv.DictReader(file)
         rows = list(reader)
 
     with open("scratches.csv", "a", newline="") as file:
-        new_scratch = {"party_1": party_1, "party_1_status": party_1_status,
-        "party_2": party_2, "party_2_status": party_2_status}
+        new_scratch = {"party_1": party_1, "party_2": party_2}
 
         for row in rows:
             if row == new_scratch:
                 raise ValueError("\nThis scratch already exists, try again to input other scratches")
             
-        fieldnames = ["party_1", "party_1_status", "party_2", "party_2_status"]
+        fieldnames = ["party_1", "party_2"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writerow(new_scratch)
 
@@ -34,7 +25,7 @@ def delete_scratches(party_1, party_2):
         rows = list(reader)
     
     with open("scratches.csv", "w", newline="") as file:
-        fieldnames = ["party_1", "party_1_status", "party_2", "party_2_status"]
+        fieldnames = ["party_1", "party_2"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for row in rows:

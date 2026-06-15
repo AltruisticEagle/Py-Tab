@@ -3,7 +3,7 @@ import re
 def checks(checked, category):
     matches = None
     if category == "speaker_score": #speaker scores check for ballots.py
-        if 65 <= checked <= 85:
+        if 0 <= checked <= 90:
             matches = True
 
     elif category == "name": #speaker/adjudicator name check (general name check)

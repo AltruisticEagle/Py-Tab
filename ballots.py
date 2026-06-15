@@ -292,11 +292,11 @@ def display_ballot(round_number, room_number):
     rows = read_csv("ballots.csv")
     for row in rows:
         if row["round"] == str(round_number) and row["room"] == str(room_number):
-            ballot.append(f"OG team: {row["og_team_name"]}, {int(row["pm_score"]) + int(row["dpm_score"])} points")
-            ballot.append(f"OO team: {row["oo_team_name"]}, {int(row["lo_score"]) + int(row["dlo_score"])} points")
-            ballot.append(f"CG team: {row["cg_team_name"]}, {int(row["mg_score"]) + int(row["gw_score"])} points")
-            ballot.append(f"CO team: {row["og_team_name"]}, {int(row["mo_score"]) + int(row["ow_score"])} points")
-    
+            ballot.append(f"OG team: {row['og_team_name']}, {int(row['pm_score']) + int(row['dpm_score'])} points")
+            ballot.append(f"OO team: {row['oo_team_name']}, {int(row['lo_score']) + int(row['dlo_score'])} points")
+            ballot.append(f"CG team: {row['cg_team_name']}, {int(row['mg_score']) + int(row['gw_score'])} points")
+            ballot.append(f"CO team: {row['co_team_name']}, {int(row['mo_score']) + int(row['ow_score'])} points")
+
     return ballot
 
 def reset_speaker_standings():

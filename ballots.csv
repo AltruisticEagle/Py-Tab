@@ -1,0 +1,4 @@
+round,room,adjudicator,pm_name,pm_score,dpm_name,dpm_score,lo_name,lo_score,dlo_name,dlo_score,mg_name,mg_score,gw_name,gw_score,mo_name,mo_score,ow_name,ow_score,og_team_name,oo_team_name,cg_team_name,co_team_name
+1,1,Jason Fang,RUS,80,ANT,80,NOR,79,PIA,79,HAM,78,LEC,78,VER,77,HAD,77,Mercedes,McLaren,Ferrari,Red Bull
+1,2,Kevin Liu,OCO,80,BEA,80,GAS,79,COL,79,LAW,78,LIN,78,SAI,77,ALB,77,Haas,Alpine,Racing Bulls,Williams
+1,3,Ferrari Zhang,STR,10,ALO,15,HUL,80,BOR,49,PER,60,BOT,50,ZHO,75,TSU,70,Aston Martin,Audi,Cadillac,BYD

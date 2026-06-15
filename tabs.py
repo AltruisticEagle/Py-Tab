@@ -1,12 +1,11 @@
 import csv
+from reader import read_csv
 
 def speaker_tab():
-    with open("speaker_standings.csv", "r") as file:
-        reader = csv.DictReader(file)
-        rows = list(reader)
-        tablex = []
-        for row in rows:
-            tablex.append(row)
+    rows = read_csv("speaker_standings.csv")
+    tablex = []
+    for row in rows:
+        tablex.append(row)
 
     tablex = sorted(tablex, key=lambda row: int(row["total_speaker_score"]), reverse=True)
     table = []

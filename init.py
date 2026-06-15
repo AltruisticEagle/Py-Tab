@@ -10,7 +10,7 @@ def create_files():
 
     if not os.path.exists("adjudicators.csv"):
         with open("adjudicators.csv", "w") as file:
-            fieldnames = ["adjudicator_name", "chair_status", "trainee_status", "rating"]
+            fieldnames = ["adjudicator_name"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
 
@@ -34,15 +34,31 @@ def create_files():
 
     if not os.path.exists("ballots.csv"):
         with open("ballots.csv", "w") as file:
-            fieldnames = ["round", "room", "adjudicator",
-            "pm_name", "pm_score",
-            "dpm_name", "dpm_score",
-            "lo_name", "lo_score",
-            "dlo_name", "dlo_score",
-            "mg_name", "mg_score",
-            "gw_name", "gw_score",
-            "mo_name", "mo_score",
-            "ow_name", "ow_score"]
+            fieldnames = [
+            "round",
+            "room",
+            "adjudicator",
+            "pm_name",
+            "pm_score",
+            "dpm_name",
+            "dpm_score",
+            "lo_name",
+            "lo_score",
+            "dlo_name",
+            "dlo_score",
+            "mg_name",
+            "mg_score",
+            "gw_name",
+            "gw_score",
+            "mo_name",
+            "mo_score",
+            "ow_name",
+            "ow_score",
+            "og_team_name",
+            "oo_team_name",
+            "cg_team_name",
+            "co_team_name"
+            ]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
 
@@ -54,7 +70,7 @@ def create_files():
     
     if not os.path.exists("scratches.csv"):
         with open("scratches.csv", "w") as file:
-            fieldnames = ["party_1", "party_1_status", "party_2", "party_2_status"]
+            fieldnames = ["party_1", "party_2"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
 
