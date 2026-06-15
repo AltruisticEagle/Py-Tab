@@ -82,14 +82,12 @@ def ui_1_1():
             if team_name.lower() == "exit":
                 raise Exit
             member_1 = input("Team member 1's full name: ").strip()
-            member_1_junior_status = input("Is member 1 a junior speaker? Y/N: ").upper().strip()
             member_2 = input("Team member 2's full name: ").strip()
-            member_2_junior_status = input("Is member 2 a junior speaker? Y/N: ").upper().strip()
 
-            teams.create_team_check(team_name, member_1, member_1_junior_status, member_2, member_2_junior_status)
+            teams.create_team_check(team_name, member_1, member_2)
 
             print("\nTeam created.\n")
-            return team_name, member_1, member_1_junior_status, member_2, member_2_junior_status
+            return team_name, member_1, member_2
 
         except Exit:
             sys.exit()
@@ -99,8 +97,7 @@ def ui_1_1():
 
 def ui_1_2():
     print("\nTo delete a team, input \"del\" into the second prompt.\n"
-        "Otherwise, input the parameter you want to modify in the same prompt: \"team_name\", \"member_1\", \"member_2\"," 
-        "\"member_1_junior_status\", or \"member_2_junior_status\" exactly.\n"
+        "Otherwise, input the parameter you want to modify in the same prompt: \"team_name\", \"member_1\", \"member_2\" exactly.\n"
         "Input \"exit\" in the first input to modify to exit.\n")
         
     while True:
@@ -109,9 +106,7 @@ def ui_1_2():
             if team_modify.lower() == "exit":
                 raise Exit
             modify_parameter = input("Modify which parameter? ").strip()
-            if modify_parameter not in ["team_name", "member_1", "member_2", 
-                                        "member_1_junior_status", "member_2_junior_status",
-                                        "del"]:
+            if modify_parameter not in ["team_name", "member_1", "member_2", "del"]:
                 print("\nInvalid input, try again\n")
                 continue
 
@@ -429,17 +424,13 @@ def display_ballot(ballot):
 def ui_5():
     print(
         "\nEnter the number of teams you want into each breaking bracket's prompt." 
-        "If there is no junior break, ignore the junior breaking table.\n"
         "Input \"exit\" in any prompt to exit.\n")
     while True:
         try:
-            open_breaking = input("How many teams break into the open bracket? ")
+            open_breaking = input("How many teams break? ")
             if open_breaking.lower() == "exit":
                 raise Exit
-            junior_breaking = input("How many teams break into the junior category? ")
-            if junior_breaking.lower() == "exit":
-                raise Exit
-            return int(open_breaking), int(junior_breaking)
+            return int(open_breaking)
                 
         except Exit:
             sys.exit()
@@ -450,11 +441,10 @@ def ui_5():
             print("\nThere has been some sort of issue, try again\n")
             continue
 
-def print_breaking(open_break, junior_break):    
+def print_breaking(open_break):    
     try:
-        headers = ["Breaking Rank", "Team Name", "Points", "Total Speaker Score", "Junior Status"]
-        print("\nOPEN BREAKING\n", tabulate.tabulate(open_break, headers, tablefmt="outline"))
-        print("\nJUNIOR BREAKING\n", tabulate.tabulate(junior_break, headers, tablefmt="outline"))
+        headers = ["Breaking Rank", "Team Name", "Points", "Total Speaker Score"]
+        print("\nBREAKING\n", tabulate.tabulate(open_break, headers, tablefmt="outline"))
     except:
         print("\nInvalid input, try again\n")
 

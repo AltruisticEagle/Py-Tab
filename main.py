@@ -85,18 +85,18 @@ def main():
         ui.display_ballot(ballot)
     
     if function_number == "5":
-        open_breaking, junior_breaking = ui.ui_5()
-        open_break, junior_break = breaking.breaking(open_breaking, junior_breaking)
-        ui.print_breaking(open_break, junior_break)
-    
+        open_breaking = ui.ui_5()
+        open_break = breaking.breaking(open_breaking)
+        ui.print_breaking(open_break)
+
     if function_number == "6.1":
         table = tabs.speaker_tab()
-        headers = ["Rank", "Speaker", "Total Score", "Junior Status"]
+        headers = ["Rank", "Speaker", "Total Score"]
         ui.ui_6_1(table, headers)
 
     if function_number == "6.2":
         table = tabs.team_tab()
-        headers = ["Rank", "Team", "Points", "Total Speaker Score", "Junior Status"]
+        headers = ["Rank", "Team", "Points", "Total Speaker Score"]
         ui.ui_6_2(table, headers)
 
 

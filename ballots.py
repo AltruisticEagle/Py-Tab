@@ -137,7 +137,7 @@ def write_to_standings(og_team_name, pm, dpm, oo_team_name, lo, dlo, cg_team_nam
         }
 
     with open("team_standings.csv", "w", newline="") as file:
-        fieldnames = ["team", "points", "total_speaker_score", "junior_status"]
+        fieldnames = ["team", "points", "total_speaker_score"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -189,7 +189,7 @@ def write_to_standings(og_team_name, pm, dpm, oo_team_name, lo, dlo, cg_team_nam
     }
 
     with open("speaker_standings.csv", "w", newline="") as file:
-        fieldnames = ["speaker", "total_speaker_score", "junior_status"]
+        fieldnames = ["speaker", "total_speaker_score"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -303,7 +303,7 @@ def reset_speaker_standings():
     rows = read_csv("speaker_standings.csv")
 
     with open("speaker_standings.csv", "w", newline="") as file:
-        fieldnames = ["speaker", "total_speaker_score", "junior_status"]
+        fieldnames = ["speaker", "total_speaker_score"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -315,7 +315,7 @@ def reset_team_standings():
     rows = read_csv("team_standings.csv")
 
     with open("team_standings.csv", "w", newline="") as file:
-        fieldnames = ["team", "points", "total_speaker_score", "junior_status"]
+        fieldnames = ["team", "points", "total_speaker_score"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
 

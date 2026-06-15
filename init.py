@@ -4,7 +4,7 @@ import csv
 def create_files():
     if not os.path.exists("teams.csv"):
         with open("teams.csv", "w") as file:
-            fieldnames = ["team_name", "member_1", "member_1_junior_status", "member_2", "member_2_junior_status", "junior_status"]
+            fieldnames = ["team_name", "member_1", "member_2",]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
 
@@ -22,13 +22,13 @@ def create_files():
 
     if not os.path.exists("speaker_standings.csv"):
         with open("speaker_standings.csv", "w") as file:
-            fieldnames = ["speaker", "total_speaker_score", "junior_status"]
+            fieldnames = ["speaker", "total_speaker_score"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
 
     if not os.path.exists("team_standings.csv"):
         with open("team_standings.csv", "w") as file:
-            fieldnames = ["team", "points", "total_speaker_score", "junior_status"]
+            fieldnames = ["team", "points", "total_speaker_score"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
 
@@ -60,12 +60,6 @@ def create_files():
 
     if not os.path.exists("open_breaks.csv"):
         with open("open_breaks.csv", "w") as file:
-            fieldnames = ["team", "points", "total_speaker_score", "junior_status"]
-            writer = csv.DictWriter(file, fieldnames=fieldnames)
-            writer.writeheader()
-
-    if not os.path.exists("junior_breaks.csv"):
-        with open("junior_breaks.csv", "w") as file:
-            fieldnames = ["team", "points", "total_speaker_score", "junior_status"]
+            fieldnames = ["team", "points", "total_speaker_score"]
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
