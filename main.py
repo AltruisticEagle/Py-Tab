@@ -1,7 +1,6 @@
 import adjudicators
 import ballots
 import breaking
-import checks
 import draw
 import init
 import tabs

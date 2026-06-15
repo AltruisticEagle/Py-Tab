@@ -69,7 +69,6 @@ def create_teams(team_name, member_1, member_1_junior_status, member_2, member_2
         row2 = {"speaker": member_2, "total_speaker_score": 0, "junior_status": member_2_junior_status}
         writer.writerows([row1, row2])
 
-#1.2.1
 def modify_teams(team_modify, modify_parameter, modify_to):
     if modify_parameter == "team_name": #this does the modification in the team standings specifically
         with open("team_standings.csv", "r") as file:
@@ -222,7 +221,6 @@ def modify_teams(team_modify, modify_parameter, modify_to):
                     row["junior_status"] = junior_status
                 writer.writerow(row)
 
-    
 def delete_teams(team_modify):
     member_1 = None
     member_2 = None
